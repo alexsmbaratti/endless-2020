@@ -1,5 +1,5 @@
 from datetime import datetime
-from endless_2020.constants import END_OF_2020
+from endless_2020.constants import END_OF_2020, DAYS_IN_DECEMBER
 
 
 def get_day_offset(input_date: datetime) -> int:
@@ -9,16 +9,19 @@ def get_day_offset(input_date: datetime) -> int:
 
 
 def strftime(input_date: datetime, fmt: str = "%Y-%m-%d %H:%M:%S.%f") -> str:
-    if input_date < END_OF_2020:
+    day_offset = get_day_offset(input_date)
+    if day_offset <= 0:
         return input_date.strftime(fmt)
 
-    day_offset = get_day_offset(input_date) + 31
+    day = day_offset + DAYS_IN_DECEMBER
     if "%d" in fmt:
-        fmt = fmt.replace("%d", str(day_offset), 1)
+        fmt = fmt.replace("%d", str(day), 1)
     if "%e" in fmt:
-        fmt = fmt.replace("%e", str(day_offset), 1)
+        fmt = fmt.replace("%e", str(day), 1)
     if "%Y" in fmt:
         fmt = fmt.replace("%Y", "2020", 1)
+    if "%y" in fmt:
+        fmt = fmt.replace("%y", "20", 1)
     if "%m" in fmt:
         fmt = fmt.replace("%m", "12", 1)
     if "%B" in fmt:
