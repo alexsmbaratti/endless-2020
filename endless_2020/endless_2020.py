@@ -1,10 +1,18 @@
 from datetime import datetime
 
 from endless_2020.constants import DAYS_IN_DECEMBER
-from endless_2020.utils import get_day_offset
+from endless_2020.utils import get_day_offset, get_datetime
 
 
 class Endless2020DateTime(datetime):
+    def __new__(cls, year, month, day, *args, **kwargs):
+        try:
+            instance = super().__new__(cls, year, month, day, *args, **kwargs)
+        except ValueError:
+            regular_datetime = get_datetime(day - DAYS_IN_DECEMBER)
+            instance = super().__new__(cls, regular_datetime.year, regular_datetime.month, regular_datetime.day)
+        return instance
+
     def strftime(self, format: str):
         day_offset = get_day_offset(self)
         if day_offset <= 0:

@@ -5,6 +5,10 @@ from endless_2020.endless_2020 import Endless2020DateTime
 
 class TestEndless2020DateTime(unittest.TestCase):
 
+    def test_init_with_endless_format(self):
+        timestamp = Endless2020DateTime(2020, 12, 32)
+        self.assertEqual("2020-12-32 00:00:00.000000", timestamp.strftime("%Y-%m-%d %H:%M:%S.%f"))
+
     def test_strftime_day_of(self):
         timestamp = Endless2020DateTime(2020, 12, 31)
         self.assertEqual("2020-12-31 00:00:00.000000", timestamp.strftime("%Y-%m-%d %H:%M:%S.%f"))
