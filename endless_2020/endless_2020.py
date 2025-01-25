@@ -2,7 +2,8 @@ import locale
 from datetime import datetime
 
 from endless_2020.constants import DAYS_IN_DECEMBER
-from endless_2020.utils import get_day_offset, get_datetime
+from endless_2020.utils import get_day_offset, get_datetime, get_week_number_sunday_first, get_week_number_monday_first, \
+    get_week_number_iso_8601
 
 
 class Endless2020DateTime(datetime):
@@ -40,17 +41,17 @@ class Endless2020DateTime(datetime):
             format = format.replace("%B", "December", 1)
         if "%b" in format:
             format = format.replace("%b", "Dec", 1)
+        if "%U" in format:
+            week_number = get_week_number_sunday_first(self)
+            format = format.replace("%U", str(week_number), 1)
+        if "%W" in format:
+            week_number = get_week_number_monday_first(self)
+            format = format.replace("%W", str(week_number), 1)
         if "%V" in format:
-            raise UnsupportedDirectiveException("%V")
+            week_number = get_week_number_iso_8601(self)
+            format = format.replace("%V", str(week_number), 1)
         formatted_date = super().strftime(format)
         return formatted_date
 
-    def isoformat(self, sep = ..., timespec = ...):
+    def isoformat(self, sep=..., timespec=...):
         return self.strftime("%Y-%m-%dT%H:%M:%S%z")
-
-
-class UnsupportedDirectiveException(Exception):
-    """Exception raised for operations or features that are not supported."""
-
-    def __init__(self, directive: str, *args):
-        super().__init__(f"{directive} is not currently supported", *args)
