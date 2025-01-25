@@ -26,4 +26,4 @@ def get_week_number_monday_first(input_date: datetime) -> int:
 
 
 def get_week_number_iso_8601(input_date: datetime) -> int:
-    return 0
+    return get_week_number_monday_first(input_date)

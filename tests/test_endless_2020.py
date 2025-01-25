@@ -58,9 +58,9 @@ class TestEndless2020DateTime(unittest.TestCase):
         sunday_after_new_year = Endless2020DateTime(2021, 1, 3)
         self.assertEqual("53", sunday_after_new_year.strftime("%U"))  # Sunday first
         self.assertEqual("52", sunday_after_new_year.strftime("%W"))  # Monday first
-        self.assertEqual("??", sunday_after_new_year.strftime("%V"))  # ISO 8601 week number
+        self.assertEqual("52", sunday_after_new_year.strftime("%V"))  # ISO 8601 week number
 
         monday_after_new_year = Endless2020DateTime(2021, 1, 4)
         self.assertEqual("53", monday_after_new_year.strftime("%U"))  # Sunday first
         self.assertEqual("53", monday_after_new_year.strftime("%W"))  # Monday first
-        self.assertEqual("??", monday_after_new_year.strftime("%V"))  # ISO 8601 week number
+        self.assertEqual("53", monday_after_new_year.strftime("%V"))  # ISO 8601 week number
