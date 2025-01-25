@@ -68,3 +68,12 @@ class Endless2020DateTime(datetime):
 
     def isoformat(self, sep=..., timespec=...):
         return self.strftime("%Y-%m-%dT%H:%M:%S%z")
+
+    @staticmethod
+    def now():
+        current_time = datetime.now()
+        return Endless2020DateTime(
+            current_time.year, current_time.month, current_time.day,
+            current_time.hour, current_time.minute, current_time.second,
+            current_time.microsecond
+        )

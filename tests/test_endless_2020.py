@@ -2,6 +2,7 @@ import locale
 import unittest
 
 from endless_2020.endless_2020 import Endless2020DateTime
+from freezegun import freeze_time
 
 
 class TestEndless2020DateTime(unittest.TestCase):
@@ -23,6 +24,14 @@ class TestEndless2020DateTime(unittest.TestCase):
     def test_init_with_unsupported_values(self):
         with self.assertRaises(ValueError):
             timestamp = Endless2020DateTime(2020, 13, 1)
+
+    @freeze_time("2021-01-02 00:00:00")
+    def test_init_with_now(self):
+        timestamp = Endless2020DateTime.now()
+        self.assertEqual("2020-12-33 00:00:00.000000", timestamp.strftime("%Y-%m-%d %H:%M:%S.%f"))
+        self.assertEqual(2020, timestamp.year)
+        self.assertEqual(12, timestamp.month)
+        self.assertEqual(33, timestamp.day)
 
     def test_strftime_day_of(self):
         timestamp = Endless2020DateTime(2020, 12, 31)

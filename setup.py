@@ -7,4 +7,9 @@ setup(
     author="alexsmbaratti",
     packages=find_packages(),
     install_requires=[],
+    extras_require={
+        "dev": [
+            "freezegun==1.2.2",
+        ],
+    },
 )
