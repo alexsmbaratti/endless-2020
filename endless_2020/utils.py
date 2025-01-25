@@ -2,8 +2,7 @@ import math
 from datetime import datetime, timedelta
 
 from endless_2020.constants import LAST_DAY_OF_2020, DAYS_IN_DECEMBER, LAST_SUNDAY_IN_2020, DAYS_IN_A_WEEK, \
-    WEEKS_IN_2020, \
-    LAST_MONDAY_IN_2020
+    WEEKS_IN_2020, LAST_MONDAY_IN_2020
 
 
 def get_day_offset(input_date: datetime) -> int:
@@ -13,7 +12,7 @@ def get_day_offset(input_date: datetime) -> int:
 
 
 def get_day(input_date: datetime) -> int:
-    if input_date <= LAST_DAY_OF_2020:
+    if is_datetime_compatible(input_date):
         return input_date.day
 
     day_offset = get_day_offset(input_date)
@@ -21,14 +20,14 @@ def get_day(input_date: datetime) -> int:
 
 
 def get_month(input_date: datetime) -> int:
-    if input_date <= LAST_DAY_OF_2020:
+    if is_datetime_compatible(input_date):
         return input_date.month
 
     return 12
 
 
 def get_year(input_date: datetime) -> int:
-    if input_date <= LAST_DAY_OF_2020:
+    if is_datetime_compatible(input_date):
         return input_date.year
 
     return 2020

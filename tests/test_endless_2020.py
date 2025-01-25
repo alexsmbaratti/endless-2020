@@ -6,9 +6,18 @@ from endless_2020.endless_2020 import Endless2020DateTime
 
 class TestEndless2020DateTime(unittest.TestCase):
 
+    def test_init(self):
+        timestamp = Endless2020DateTime(2021, 1, 1)
+        self.assertEqual("2020-12-32 00:00:00.000000", timestamp.strftime("%Y-%m-%d %H:%M:%S.%f"))
+        self.assertEqual(2020, timestamp.year)
+        self.assertEqual(12, timestamp.month)
+        self.assertEqual(32, timestamp.day)
+
     def test_init_with_endless_format(self):
         timestamp = Endless2020DateTime(2020, 12, 32)
         self.assertEqual("2020-12-32 00:00:00.000000", timestamp.strftime("%Y-%m-%d %H:%M:%S.%f"))
+        self.assertEqual(2020, timestamp.year)
+        self.assertEqual(12, timestamp.month)
         self.assertEqual(32, timestamp.day)
 
     def test_init_with_unsupported_values(self):
@@ -20,9 +29,9 @@ class TestEndless2020DateTime(unittest.TestCase):
         self.assertEqual("2020-12-31 00:00:00.000000", timestamp.strftime("%Y-%m-%d %H:%M:%S.%f"))
 
     def test_strftime_dec_01_2020(self):
-        timestamp = Endless2020DateTime(2020, 12, 1)
-        self.assertEqual("2020-12-01 00:00:00.000000", timestamp.strftime("%Y-%m-%d %H:%M:%S.%f"))
-        self.assertEqual("2020-12- 1 00:00:00.000000", timestamp.strftime("%Y-%m-%e %H:%M:%S.%f"))
+        timestamp = Endless2020DateTime(2005, 1, 1)
+        self.assertEqual("2005-01-01 00:00:00.000000", timestamp.strftime("%Y-%m-%d %H:%M:%S.%f"))
+        self.assertEqual("05-01- 1 00:00:00.000000", timestamp.strftime("%y-%m-%e %H:%M:%S.%f"))
 
     def test_strftime_day_after(self):
         timestamp = Endless2020DateTime(2021, 1, 1)
