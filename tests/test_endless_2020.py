@@ -11,6 +11,10 @@ class TestEndless2020DateTime(unittest.TestCase):
         self.assertEqual("2020-12-32 00:00:00.000000", timestamp.strftime("%Y-%m-%d %H:%M:%S.%f"))
         self.assertEqual(32, timestamp.day)
 
+    def test_init_with_unsupported_values(self):
+        with self.assertRaises(ValueError):
+            timestamp = Endless2020DateTime(2020, 13, 1)
+
     def test_strftime_day_of(self):
         timestamp = Endless2020DateTime(2020, 12, 31)
         self.assertEqual("2020-12-31 00:00:00.000000", timestamp.strftime("%Y-%m-%d %H:%M:%S.%f"))

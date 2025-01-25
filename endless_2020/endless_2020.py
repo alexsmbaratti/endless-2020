@@ -11,8 +11,11 @@ class Endless2020DateTime(datetime):
         try:
             instance = super().__new__(cls, year, month, day, *args, **kwargs)
         except ValueError:
-            regular_datetime = get_datetime(day - DAYS_IN_DECEMBER)
-            instance = super().__new__(cls, regular_datetime.year, regular_datetime.month, regular_datetime.day)
+            if day > DAYS_IN_DECEMBER:
+                regular_datetime = get_datetime(day - DAYS_IN_DECEMBER)
+                instance = super().__new__(cls, regular_datetime.year, regular_datetime.month, regular_datetime.day)
+            else:
+                raise
         return instance
 
     @property
