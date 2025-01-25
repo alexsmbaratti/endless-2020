@@ -15,12 +15,17 @@ class Endless2020DateTime(datetime):
             instance = super().__new__(cls, regular_datetime.year, regular_datetime.month, regular_datetime.day)
         return instance
 
-    def strftime(self, format: str):
+    @property
+    def day(self) -> int:
         day_offset = get_day_offset(self)
         if day_offset <= 0:
+            return super().day
+        return get_day_offset(self) + DAYS_IN_DECEMBER
+
+    def strftime(self, format: str):
+        if self.year <= 2020:
             return super().strftime(format)
 
-        day = day_offset + DAYS_IN_DECEMBER
         if "%x" in format:
             format = format.replace("%x", locale.nl_langinfo(locale.D_FMT), 1)
         if "%X" in format:
@@ -28,9 +33,9 @@ class Endless2020DateTime(datetime):
         if "%c" in format:
             format = format.replace("%c", locale.nl_langinfo(locale.T_FMT), 1)
         if "%d" in format:
-            format = format.replace("%d", str(day), 1)
+            format = format.replace("%d", str(self.day), 1)
         if "%e" in format:
-            format = format.replace("%e", str(day), 1)
+            format = format.replace("%e", str(self.day), 1)
         if "%Y" in format:
             format = format.replace("%Y", "2020", 1)
         if "%y" in format:
