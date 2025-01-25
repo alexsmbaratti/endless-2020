@@ -10,7 +10,7 @@ Then, you can print it out as if 2020 never ended.
 ```python
 from endless_2020.endless_2020 import Endless2020DateTime
 
-timestamp = Endless2020DateTime(2025, 1, 25)  # Represents Friday, January 25, 2025
+timestamp = Endless2020DateTime(2025, 1, 25)  # Represents Saturday, January 25, 2025
 print(timestamp.strftime("%A, %B %d, %Y"))
 ```
 
