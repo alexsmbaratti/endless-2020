@@ -2,8 +2,8 @@ import locale
 from datetime import datetime
 
 from endless_2020.constants import DAYS_IN_DECEMBER
-from endless_2020.utils import get_day_offset, get_datetime, get_week_number_sunday_first, get_week_number_monday_first, \
-    get_week_number_iso_8601
+from endless_2020.utils import get_datetime, get_week_number_sunday_first, get_week_number_monday_first, \
+    get_week_number_iso_8601, get_day, get_month, get_year, is_datetime_compatible
 
 
 class Endless2020DateTime(datetime):
@@ -20,13 +20,18 @@ class Endless2020DateTime(datetime):
 
     @property
     def day(self) -> int:
-        day_offset = get_day_offset(self)
-        if day_offset <= 0:
-            return super().day
-        return get_day_offset(self) + DAYS_IN_DECEMBER
+        return get_day(self)
+
+    @property
+    def month(self) -> int:
+        return get_month(self)
+
+    @property
+    def year(self) -> int:
+        return get_year(self)
 
     def strftime(self, format: str):
-        if self.year <= 2020:
+        if is_datetime_compatible(self):
             return super().strftime(format)
 
         if "%x" in format:
@@ -40,11 +45,11 @@ class Endless2020DateTime(datetime):
         if "%e" in format:  # Space-padded day
             format = format.replace("%e", str(self.day), 1)
         if "%Y" in format:  # Full year
-            format = format.replace("%Y", "2020", 1)
+            format = format.replace("%Y", str(self.year), 1)
         if "%y" in format:  # Two-digit year
             format = format.replace("%y", "20", 1)
         if "%m" in format:  # Zero-padded month
-            format = format.replace("%m", "12", 1)
+            format = format.replace("%m", str(self.month), 1)
         if "%B" in format:  # Full month name
             format = format.replace("%B", "December", 1)
         if "%b" in format:  # Abbreviated month name

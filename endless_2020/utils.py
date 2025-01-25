@@ -20,6 +20,24 @@ def get_day(input_date: datetime) -> int:
     return day_offset + DAYS_IN_DECEMBER
 
 
+def get_month(input_date: datetime) -> int:
+    if input_date <= LAST_DAY_OF_2020:
+        return input_date.month
+
+    return 12
+
+
+def get_year(input_date: datetime) -> int:
+    if input_date <= LAST_DAY_OF_2020:
+        return input_date.year
+
+    return 2020
+
+
+def is_datetime_compatible(input_date: datetime) -> bool:
+    return input_date <= LAST_DAY_OF_2020
+
+
 def get_datetime(day_offset: int) -> datetime:
     return LAST_DAY_OF_2020 + timedelta(days=day_offset)
 
