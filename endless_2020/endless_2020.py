@@ -35,19 +35,19 @@ class Endless2020DateTime(datetime):
             format = format.replace("%X", locale.nl_langinfo(locale.T_FMT), 1)
         if "%c" in format:
             format = format.replace("%c", locale.nl_langinfo(locale.T_FMT), 1)
-        if "%d" in format:
+        if "%d" in format:  # Zero-padded day
             format = format.replace("%d", str(self.day), 1)
-        if "%e" in format:
+        if "%e" in format:  # Space-padded day
             format = format.replace("%e", str(self.day), 1)
-        if "%Y" in format:
+        if "%Y" in format:  # Full year
             format = format.replace("%Y", "2020", 1)
-        if "%y" in format:
+        if "%y" in format:  # Two-digit year
             format = format.replace("%y", "20", 1)
-        if "%m" in format:
+        if "%m" in format:  # Zero-padded month
             format = format.replace("%m", "12", 1)
-        if "%B" in format:
+        if "%B" in format:  # Full month name
             format = format.replace("%B", "December", 1)
-        if "%b" in format:
+        if "%b" in format:  # Abbreviated month name
             format = format.replace("%b", "Dec", 1)
         if "%U" in format:
             week_number = get_week_number_sunday_first(self)
