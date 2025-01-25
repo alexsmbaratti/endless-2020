@@ -6,7 +6,7 @@ from endless_2020.utils import get_day_offset, get_datetime
 
 
 class Endless2020DateTime(datetime):
-    def __new__(cls, year, month, day, *args, **kwargs):
+    def __new__(cls, year: int, month: int, day: int, *args, **kwargs):
         try:
             instance = super().__new__(cls, year, month, day, *args, **kwargs)
         except ValueError:
