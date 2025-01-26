@@ -8,11 +8,15 @@ from freezegun import freeze_time
 class TestEndless2020DateTime(unittest.TestCase):
 
     def test_init(self):
-        timestamp = Endless2020DateTime(2021, 1, 1)
-        self.assertEqual("2020-12-32 00:00:00.000000", timestamp.strftime("%Y-%m-%d %H:%M:%S.%f"))
+        timestamp = Endless2020DateTime(2021, 1, 1, hour=18, minute=25, second=3, microsecond=5)
+        self.assertEqual("2020-12-32 18:25:03.000005", timestamp.strftime("%Y-%m-%d %H:%M:%S.%f"))
         self.assertEqual(2020, timestamp.year)
         self.assertEqual(12, timestamp.month)
         self.assertEqual(32, timestamp.day)
+        self.assertEqual(18, timestamp.hour)
+        self.assertEqual(25, timestamp.minute)
+        self.assertEqual(3, timestamp.second)
+        self.assertEqual(5, timestamp.microsecond)
 
     def test_init_with_endless_format(self):
         timestamp = Endless2020DateTime(2020, 12, 32)
