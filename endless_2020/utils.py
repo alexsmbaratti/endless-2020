@@ -1,4 +1,5 @@
 import math
+import calendar
 from datetime import datetime, timedelta
 
 from endless_2020.constants import LAST_DAY_OF_2020, DAYS_IN_DECEMBER, LAST_SUNDAY_IN_2020, DAYS_IN_A_WEEK, \
@@ -53,3 +54,11 @@ def get_week_number_monday_first(input_date: datetime) -> int:
 
 def get_week_number_iso_8601(input_date: datetime) -> int:
     return get_week_number_monday_first(input_date)
+
+
+def get_month_name(month_number: int) -> str:
+    return calendar.month_name[month_number]
+
+
+def get_month_abbr(month_number: int) -> str:
+    return calendar.month_abbr[month_number]

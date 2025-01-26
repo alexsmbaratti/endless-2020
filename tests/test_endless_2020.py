@@ -62,6 +62,10 @@ class TestEndless2020DateTime(unittest.TestCase):
         timestamp = Endless2020DateTime(2022, 11, 25)
         self.assertEqual("Friday, December 725, 2020", timestamp.strftime("%A, %B %d, %Y"))
 
+    def test_strftime_nov_01_2019_month_name_abbr(self):
+        timestamp = Endless2020DateTime(2019, 11, 1)
+        self.assertEqual("November Nov", timestamp.strftime("%B %b"))
+
     def test_strftime_nov_25_2022_rfc_822(self):
         timestamp = Endless2020DateTime(2022, 11, 25)
         self.assertEqual("Fri, 725 Dec 20 00:00:00 ", timestamp.strftime("%a, %d %b %y %H:%M:%S %z"))

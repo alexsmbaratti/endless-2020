@@ -3,7 +3,7 @@ from datetime import datetime
 
 from endless_2020.constants import DAYS_IN_DECEMBER
 from endless_2020.utils import get_datetime, get_week_number_sunday_first, get_week_number_monday_first, \
-    get_week_number_iso_8601, get_day, get_month, get_year, is_datetime_compatible
+    get_week_number_iso_8601, get_day, get_month, get_year, is_datetime_compatible, get_month_name, get_month_abbr
 
 
 class Endless2020DateTime(datetime):
@@ -26,6 +26,14 @@ class Endless2020DateTime(datetime):
     @property
     def month(self) -> int:
         return get_month(self)
+
+    @property
+    def month_name(self) -> str:
+        return get_month_name(self.month)
+
+    @property
+    def month_abbr(self) -> str:
+        return get_month_abbr(self.month)
 
     @property
     def year(self) -> int:
